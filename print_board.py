@@ -1,3 +1,4 @@
+# 현재 스도쿠 보드를 간결하게 출력
 def print_board(board):
-    for row in board:
-        print(" ".join(map(str, row)), end="\n")
+    for a in board:
+        print(*a)

@@ -1,19 +1,17 @@
 import random
+from initialize_board import initialize_board
+from solve_sudoku import solve_sudoku
 
-def generate_sudoku():
+def generate_sudoku(difficulty=30):
+    board = initialize_board()
+    # 스도쿠 퍼즐을 무작위로 채우고 풀이
+    solve_sudoku(board)
     
-    puzzle = []
-    # 0의 확률을 50%으로 고정 - 전체 18개 중 9개가 0이므로!
-    numbers = [0] * 9 + list(range(1, 10))
-    for _ in range(9):    
-        row = []
-        for _ in range(9):
-            #rand_int = random.randint(0, 9)
-            rand_int = random.choice(numbers)
-            row.append(rand_int)
-        puzzle.append(row)
-        
-    return puzzle
-
-sudoku_puzzle = generate_sudoku()
-print_board(sudoku_puzzle)
+    # 난이도 조절을 위해 일부 숫자를 제거
+    removed_cells = difficulty
+    while removed_cells > 0:
+        row, col = random.randint(0, 8), random.randint(0, 8)
+        if board[row][col] != 0:
+            board[row][col] = 0
+            removed_cells -= 1
+    return board
